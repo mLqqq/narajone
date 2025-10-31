@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<title>Доставка еды — Главная</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; }
+  nav { margin-bottom: 20px; }
+  nav button { margin-right: 10px; }
+  .section { display: none; }
+  .section.active { display: block; }
+  .product { margin: 10px 0; }
+  button { padding: 5px 10px; }
+</style>
+</head>
+<body>
+
+<h1>Добро пожаловать в службу доставки</h1>
+
+<nav>
+  <button onclick="showSection('pizza')">Пицца</button>
+  <button onclick="showSection('burgers')">Бургеры</button>
+  <button onclick="showSection('drinks')">Напитки</button>
+  <button onclick="location.href='profile.html'">Профиль</button>
+  <button onclick="location.href='cart.html'">Корзина</button>
+</nav>
+
+
+
+<div id="pizza" class="section">
+  <h2>Пицца</h2>
+  <div class="product">
+    <span>Маргарита</span>
+    <button onclick="addToCart('Пицца Маргарита', 500)">Добавить - 500₽</button>
+  </div>
+  <div class="product">
+    <span>Пепперони</span>
+    <button onclick="addToCart('Пепперони', 600)">Добавить - 600₽</button>
+  </div>
+</div>
+
+<div id="burgers" class="section">
+  <h2>Бургеры</h2>
+  <div class="product">
+    <span>Классический Бургер</span>
+    <button onclick="addToCart('Классический бургер', 300)">Добавить - 300₽</button>
+  </div>
+  <div class="product">
+    <span>Чикен Бургер</span>
+    <button onclick="addToCart('Чикен Бургер', 350)">Добавить - 350₽</button>
+  </div>
+</div>
+
+<div id="drinks" class="section">
+  <h2>Напитки</h2>
+  <div class="product">
+    <span>Кока-Кола</span>
+    <button onclick="addToCart('Кока-Кола', 150)">Добавить - 150₽</button>
+  </div>
+  <div class="product">
+    <span>Фанта</span>
+    <button onclick="addToCart('Фанта', 150)">Добавить - 150₽</button>
+  </div>
+</div>
+
+<script>
+  function showSection(sectionId) {
+    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+    document.getElementById(sectionId).classList.add('active');
+  }
+
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+  function addToCart(name, price) {
+    cart.push({name, price});
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert('Товар добавлен в корзину');
+  }
+</script>
+<script async src="https://telegram.org/js/telegram-web-app.js"></script>
+<script>
+  // Инициализация WebApp
+  function init() {
+    if (window.TelegramWebApp) {
+      window.TelegramWebApp.ready();
+    }
+  }
+  init();
+</script>
+<div style="position: fixed; bottom: 0; left:0; right: 0; display: flex; background: #eee; border-top: 1px solid #ccc; height: 50px;">
+  <button style="flex:1; border:none; background:none; font-size:16px;" onclick="location.href='main.html'">Главная</button>
+  <button style="flex:1; border:none; background:none; font-size:16px;" onclick="location.href='profile.html'">Профиль</button>
+  <button style="flex:1; border:none; background:none; font-size:16px;" onclick="location.href='cart.html'">Корзина</button>
+</div>
+</body>
+</html>
