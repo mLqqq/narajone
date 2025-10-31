@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<title>Корзина</title>
+<style>
+  body { font-family: Arial, sans-serif; padding-bottom: 60px; }
+  .product { border: 1px solid #ccc; padding: 10px; margin: 10px; }
+  .bottom-menu { position: fixed; bottom: 0; left: 0; right: 0; display: flex; background: #eee; border-top: 1px solid #ccc; }
+  .bottom-menu button { flex: 1; padding: 10px; border: none; background: none; }
+</style>
+</head>
+<body>
+
+<h2>Ваша корзина</h2>
+<table id="cartTable">
+  <thead>
+    <tr>
+      <th>Товар</th>
+      <th>Цена</th>
+      <th>Действие</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<button id="orderBtn">Оформить заказ</button>
+
+<script>
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+  function renderCart() {
+    const tbody = document.querySelector('#cartTable tbody');
+    tbody.innerHTML = '';
+    let total = 0;
+    cart.forEach((item, index) => {
+      total += item.price;
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${item.name}</td>
+        <td>${item.price} ₽</td>
+        <td><button onclick="removeItem(${index})">Удалить</button></td>
+      `;
+      tbody.appendChild(row);
+    });
+    if (cart.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="3">Корзина пуста</td></tr>';
+    }
+  }
+
+  function removeItem(index) {
+    cart.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    renderCart();
+  }
+
+  document.getElementById('orderBtn').addEventListener('click', () => {
+    alert('Спасибо за заказ! Он будет скоро доставлен.');
+    // Можно добавить дальнейшие шаги по оформлению
+  });
+
+  renderCart();
+</script>
+<div class="bottom-menu">
+  <button onclick="location.href='index.html'">Главная</button>
+  <button onclick="location.href='profile.html'">Профиль</button>
+  <button onclick="location.href='cart.html'">Корзина</button>
+</div>
+</body>
+</html>

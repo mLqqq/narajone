@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Главная — Доставка еды</title>
+<style>
+  body { font-family: Arial, sans-serif; text-align: center; }
+  .category { padding: 20px; margin: 10px; border: 1px solid #ccc; cursor: pointer; display: inline-block; width: 200px; }
+  .bottom-menu { position: fixed; bottom: 0; left: 0; right: 0; display: flex; background: #eee; border-top: 1px solid #ccc; }
+  .bottom-menu button { flex: 1; padding: 10px; border: none; background: none; }
+</style>
+</head>
+<body>
+<h1>Выберите раздел</h1>
+<div class="category" onclick="location.href='pizza.html'">🍕 Пицца</div>
+
+<div class="bottom-menu">
+  <button onclick="location.href='index.html'">Главная</button>
+  <button onclick="location.href='profile.html'">Профиль</button>
+  <button onclick="location.href='cart.html'">Корзина</button>
+</div>
+</body>
+</html>
